@@ -9,14 +9,29 @@ trigger:
 pool:
   vmImage: 'ubuntu-16.04' # other options: 'macOS-10.14', 'vs2017-win2016'
 
+
+
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: 'pom.xml'
+    mavenPomFile: $(system.defaultWorkingDirectory)/IdentityService/pom.xml
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
+    jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
     goals: 'package'
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: $(system.defaultWorkingDirectory)/IdentityService/gradlew
+    gradleOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'build'
+    
