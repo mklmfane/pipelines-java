@@ -14,7 +14,7 @@ pool:
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: $(system.defaultWorkingDirectory)/IdentityService/pom.xml
+    mavenPomFile: '$(system.defaultWorkingDirectory)/IdentityService/pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
@@ -26,7 +26,7 @@ steps:
 - task: Gradle@2
   inputs:
     workingDirectory: ''
-    gradleWrapperFile: $(system.defaultWorkingDirectory)/IdentityService/gradlew
+    gradleWrapperFile: '$(system.defaultWorkingDirectory)/IdentityService/gradlew'
     gradleOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
